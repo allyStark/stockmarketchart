@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css?family=Keania+One|Monofett|Orbitron");
+.main {
+  color: red; }
+
+.chart-div {
+  height: 78vh;
+  width: 100vw; }
+
+.magenta {
+  color: magenta; }
+
+.lightgreen {
+  color: lightgreen; }
+
+.salmon {
+  color: salmon; }
+
+.lightblue {
+  color: lightblue; }
+
+.yellow {
+  color: yellow; }
+
+.orange {
+  color: orange; }
+
+.pink {
+  color: pink; }
+
+.gold {
+  color: gold; }
+
+.fushia {
+  color: fuchsia; }
+
+.silver {
+  color: silver; }
+
+.olive {
+  color: olive; }
+
+.teal {
+  color: teal; }
+
+.lime {
+  color: lime; }
+
+.aqua {
+  color: aqua; }
+
+.chocolate {
+  color: chocolate; }
+
+.CornflowerBlue {
+  color: cornflowerblue; }
+
+.crimson {
+  color: crimson; }
+
+.cyan {
+  color: cyan; }
+
+.honeydew {
+  color: honeydew; }
+
+.lavender {
+  color: lavender; }
+
+.khaki {
+  color: khaki; }
+
+.lightsalmon {
+  color: lightsalmon; }
+
+.stock-button {
+  border: 1px black solid;
+  width: 200px;
+  height: 100px;
+  display: inline-block;
+  position: relative;
+  box-shadow: 0 0 20px 0 lightsteelblue; }
+  .stock-button:before, .stock-button:after {
+    content: "";
+    position: absolute;
+    width: 96px;
+    height: 5px;
+    top: 48px;
+    left: 52px;
+    transition: 0.2s; }
+  .stock-button div {
+    margin-top: 15px;
+    font-family: "Keania One", cursive;
+    font-size: 300%;
+    text-align: center; }
+  .stock-button:hover {
+    box-shadow: inset 0 0 30px red; }
+    .stock-button:hover .text {
+      color: red; }
+    .stock-button:hover:before {
+      background-color: red;
+      box-shadow: 0 0 2px 0 #ccc;
+      transform: rotate(135deg); }
+    .stock-button:hover:after {
+      background-color: red;
+      box-shadow: 0 0 2px 0 #ccc;
+      transform: rotate(-135deg); }
+
+.get-stock {
+  display: absolute;
+  border-radius: 5px;
+  height: 40px;
+  margin-top: 20px;
+  margin-left: 40px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 20px 0 lightsteelblue; }
+
+.submit-button {
+  display: absolute;
+  height: 40px;
+  width: 100px;
+  padding-top: -18px;
+  margin-left: 10px;
+  margin-top: 4px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 20px 0 lightsteelblue; }
+  .submit-button:hover {
+    border: 2px black solid; }
+  .submit-button:active {
+    box-shadow: inset 0 0 10px #000000; }
+
+.error-message {
+  display: inline-block;
+  color: red;
+  font-size: 140%;
+  font-weight: bolder;
+  margin-left: 40px;
+  margin-top: 5px;
+  box-shadow: 0 0 20px 0 red;
+  border-radius: 2px; }
+
+.info {
+  color: lightblue;
+  margin-left: 40px;
+  margin-top: 10px;
+  font-size: 140%;
+  display: inline-block;
+  box-shadow: 0 0 20px 0 lightsteelblue; }
+
+body {
+  background-color: #1E1E1E; }
