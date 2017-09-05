@@ -61,7 +61,7 @@ setInterval(() => {
         });
 }, 21600000);
 
-http.listen(process.env.PORT || 5000, () => {
+http.listen(process.env.PORT, () => {
     console.log('Connected to server');
 });
 
