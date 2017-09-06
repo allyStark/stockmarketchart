@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
         });
     });
     socket.on('stock delete', (request) => {
-        for(let i = 0; i < stockData.length; i++){
+        for(let i = 0; i < stockData.length; i++){ 
             if(stockData[i][0].symbol == request){
                 stockData.splice(i,1);
                 i = stockData.length;
@@ -52,7 +52,6 @@ io.on('connection', (socket) => {
         }
     });
 });
-
 //refresh data every 6 hours
 setInterval(() => {
     refreshStocks(stockData, 0, [], (data) => {
@@ -91,9 +90,9 @@ function getStock(stockName, callback) {
     stockName = stockName.toUpperCase();
     let thisDate = getDates();
 
-    googleFinance.historical({
+    googleFinance.historical({  
     symbol: stockName,
-    from: thisDate[1],
+    from: thisDate[1], 
     to: thisDate[0]
     }, (err, quotes) => { 
         if(err) throw err;
