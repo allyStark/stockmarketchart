@@ -87,6 +87,10 @@ function getDates(){
 
 function getStock(stockName, callback) {
 
+    if(getIndex(stockName, stockData) !== -1){
+        return;
+    };
+
     stockName = stockName.toUpperCase();
     let thisDate = getDates();
 
@@ -112,4 +116,18 @@ function refreshStocks(stockArray, index, newStockArray, callback){
         newStockArray.push(data);
         refreshStocks(stockArray, index + 1, newStockArray, callback);
     });
+}
+
+function getIndex(name, thisData){
+    let i = 0;
+    name = name.toUpperCase();
+    while(i < thisData.length){
+        
+        //console.log(thisData[i][0]);
+        if(name === thisData[i][0].symbol){
+            return i;
+        }
+        i++
+    }
+    return -1;
 }

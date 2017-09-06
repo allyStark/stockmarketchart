@@ -27920,6 +27920,7 @@ ReactDOM.render(React.createElement(Main, null), document.getElementById('main')
 
 },{"./components/main":230,"react":216,"react-dom":64}],229:[function(require,module,exports){
 const React = require('react');
+const io = require('socket.io-client')();
 
 const Highcharts = require('highcharts/highstock');
 
@@ -27929,8 +27930,6 @@ let chartDates = [];
 class Graph extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {};
     }
     componentWillReceiveProps(newProps) {
         returnNewData(newProps, () => {
@@ -27971,13 +27970,14 @@ class Graph extends React.Component {
 
 module.exports = Graph;
 
+//put google finance data into chart-friendly form!
 function returnNewData(data, callback) {
     if (chartData.length === 0 || chartData.length === data.data.length) {
+        //create chart or refresh all stocks with updated data
         let dates = [];
         let seriesData = [];
-
+        //i will always be 0 except on refresh
         for (let i = 0; i < data.data.length; i++) {
-            let stockName = data.data[i][0].symbol;
             let stockPrice = [];
             for (let j = 0; j < data.data[i].length; j++) {
                 if (i === 0) {
@@ -27987,7 +27987,7 @@ function returnNewData(data, callback) {
                 stockPrice.push(data.data[i][j].open);
             }
             let thisObj = {
-                name: stockName,
+                name: data.data[i][0].symbol,
                 data: stockPrice
             };
             seriesData.push(thisObj);
@@ -27996,15 +27996,15 @@ function returnNewData(data, callback) {
         chartDates = dates;
         callback();
     } else if (chartData.length < data.data.length) {
+        //add stock to chart
         let thisData = data.data[data.data.length - 1];
-        let stockName = thisData[0].symbol;
         let stockPrice = [];
 
         for (let i = 0; i < thisData.length; i++) {
             stockPrice.push(thisData[i].open);
         }
         let thisObj = {
-            name: stockName,
+            name: thisData[0].symbol,
             data: stockPrice,
             _colorIndex: chartData.length % 21,
             _symbolIndex: chartData.length % 4
@@ -28012,14 +28012,40 @@ function returnNewData(data, callback) {
         chartData.push(thisObj);
         callback();
     } else if (chartData.length > data.data.length) {
-        console.log('stock removed');
-        console.log(data.data[0][0].symbol);
-        console.log(chartData[0].name);
-        for (let i = 0; i < chartData.length; i++) {}
+        //remove stock from chart
+        let i = 0;
+        while (i < chartData.length) {
+            let thisIndex = getIndex(chartData[i].name, data.data);
+            if (thisIndex === -1) {
+                chartData.splice(i, 1);
+                realignIndex();
+                callback();
+                i = chartData.length;
+            }
+            i++;
+        }
     }
 }
 
-},{"highcharts/highstock":52,"react":216}],230:[function(require,module,exports){
+function getIndex(name, newData) {
+    let i = 0;
+    while (i < newData.length) {
+        if (name === newData[i][0].symbol) {
+            return i;
+        }
+        i++;
+    }
+    return -1;
+}
+//reset the symbol and color indexes so the chart can display properly
+function realignIndex() {
+    for (let i = 0; i < chartData.length; i++) {
+        chartData[i]._colorIndex = i % 21;
+        chartData[i]._symbolIndex = i % 4;
+    }
+}
+
+},{"highcharts/highstock":52,"react":216,"socket.io-client":217}],230:[function(require,module,exports){
 const React = require('react');
 
 const Graph = require('./graph');
