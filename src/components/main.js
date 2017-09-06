@@ -18,6 +18,7 @@ class Main extends React.Component{
 
         io.on('stock response', (data) => {
             this.setState({data: data, valid: true});
+            document.getElementById('submit-button').disabled = false;
         });
 
         io.on('invalid entry', () => {
@@ -30,13 +31,18 @@ class Main extends React.Component{
     render() {
         return(
             <div>
+                
                 <Graph data={this.state.data} />
                 <Panel data={this.state.data} />
-                <input id="get-stock" className="get-stock" /><button className="submit-button" onClick={() => {
+                <input id="get-stock" className="get-stock" /><button id="submit-button" className="submit-button" onClick={() => {
                     if(document.getElementById('get-stock').value) {
                         io.emit('stock request', document.getElementById('get-stock').value);
                         document.getElementById('get-stock').value = "";
                         document.getElementById('error-message').innerHTML = "";
+                        document.getElementById('submit-button').disabled = true;
+                        setTimeout(() => {
+                            document.getElementById('submit-button').disabled = false;
+                        }, 1000);
                     } else {
                         document.getElementById('error-message').innerHTML = " Please enter a stock symbol ";
                     }

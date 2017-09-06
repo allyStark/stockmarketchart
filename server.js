@@ -101,7 +101,7 @@ function getStock(stockName, callback) {
     }, (err, quotes) => { 
         if(err) throw err;
         callback(quotes);
-});
+    });
 }
 
 //check and update stock information
@@ -122,9 +122,7 @@ function getIndex(name, thisData){
     let i = 0;
     name = name.toUpperCase();
     while(i < thisData.length){
-        
-        //console.log(thisData[i][0]);
-        if(name === thisData[i][0].symbol){
+        if(name === thisData[i][0].symbol.toUpperCase()){
             return i;
         }
         i++
